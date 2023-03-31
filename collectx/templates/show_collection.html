@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Collectx</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link href='https://fonts.googleapis.com/css?family=Inter' rel='stylesheet'>
+</head>
+    <div class="navbar" style="font-size: 20px;">
+        <ul style="float:left">
+            <li><a href="/">Collectx</a></li>
+        </ul>
+        <form id="form" action="{{url_for('search')}}" method="post" enctype="multipart/form-data"> 
+            <input type="text" id="query" name="q" placeholder="Search for other users' collections..." value="" required>
+            <input type="submit" name="search" value="Search"/>
+        </form>
+        <ul style="float:right">
+            <li><a><img class="icons" src="{{url_for('static', filename='/images/message_icon.png')}}"></a></li>
+            <li><a><img class="icons" src="{{url_for('static', filename='/images/directory_icon.png')}}"></a></li>
+            <li><a href="{{url_for('show_profile', username=logname)}}"><img class="icons" src="{{url_for('static', filename='/images/profile_icon.png')}}"></a></li>
+        </ul>
+    </div>
+    <div style="padding-top: 50px; padding-left: 50px; text-align: left;">
+        <h1>{{collectionname}} Collection</h1>
+        {% if owner == logname %}
+            <div style="text-align: left;"><a href="{{url_for('create_item_page', collectionid=collectionid)}}"><button>+ Add to collection</button></a></div>
+        {% else %}
+            <h2><a href="{{url_for('show_profile', username=owner)}}"><img class="icon" src="{{url_for('files', filename=ownerfile)}}" alt = "img" style="width:50px; height:50px">@{{owner}}</a></h2>
+            <button>Message</button>
+        {% endif %}
+        {% for item in items %}
+            <div class="collectiondiv"><a href="{{url_for('show_item', itemid=item.itemid)}}"><img src="{{url_for('files', filename=item.filename)}}" alt = "img" class="item"></a>{{item.itemname}}</div>
+        {% endfor %}
+    </div>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Collectx</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link href='https://fonts.googleapis.com/css?family=Inter' rel='stylesheet'>
+</head>
+    <div class="navbar" style="font-size: 20px;">
+        <ul style="float:left">
+            <li><a href="/">Collectx</a></li>
+        </ul>
+        <form id="form" action="{{url_for('search')}}" method="post" enctype="multipart/form-data"> 
+            <input type="text" id="query" name="q" placeholder="Search for other users' collections..." value="" required>
+            <input type="submit" name="search" value="Search"/>
+        </form>
+        <ul style="float:right">
+            <li><a><img class="icons" src="{{url_for('static', filename='/images/message_icon.png')}}"></a></li>
+            <li><a><img class="icons" src="{{url_for('static', filename='/images/directory_icon.png')}}"></a></li>
+            <li><a href="{{url_for('show_profile', username=logname)}}"><img class="icons" src="{{url_for('static', filename='/images/profile_icon.png')}}"></a></li>
+        </ul>
+    </div>
+    <div style="padding-top: 50px; padding-left: 50px; text-align: left;">
+        <h1>{{itemname}}</h1>
+        {% if itemowner != logname %}
+            <h2><a href="{{url_for('show_profile', username=itemowner)}}"><img class="icon" src="{{url_for('files', filename=ownerfile)}}" alt = "img" style="width:50px; height:50px">@{{itemowner}}</a></h2>
+            <button>Message</button>
+        {% endif %}
+        <div class="itemsdiv">
+            <img src="{{url_for('files', filename=filename)}}" alt = "img" class="item"></a>
+            <p>Blind Box Series: {{itemseries}}<br>Description: {{description}}<br>Condition: {{condition}}<br>Date added: {{created}}</p>
+        </div>
+        {% if itemowner == logname %}
+        <form style="text-align: left;" action="{{url_for('create_item')}}?target={{url_for('show_index')}}" method="post" enctype="multipart/form-data">
+            <input type="hidden" name="operation" value="delete"/>
+            <input type="hidden" name="itemid" value="{{itemid}}"/>
+            <input type="submit" name="delete" value="delete this post"/>
+        </form>
+        {% endif %}
+    </div>
+</html>

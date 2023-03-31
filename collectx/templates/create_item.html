@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Collectx</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link href='https://fonts.googleapis.com/css?family=Inter' rel='stylesheet'>
+</head>
+    <div class="navbar" style="font-size: 20px;">
+        <ul style="float:left">
+            <li><a href="/">Collectx</a></li>
+        </ul>
+        <form id="form" action="{{url_for('search')}}" method="post" enctype="multipart/form-data"> 
+            <input type="text" id="query" name="q" placeholder="Search for other users' collections..." value="" required>
+            <input type="submit" name="search" value="Search"/>
+        </form>
+        <ul style="float:right">
+            <li><a><img class="icons" src="/static/images/message_icon.png"></a></li>
+            <li><a><img class="icons" src="/static/images/directory_icon.png"></a></li>
+            <li><a href="{{url_for('show_profile', username=logname)}}"><img class="icons" src="/static/images/profile_icon.png"></a></li>
+        </ul>
+    </div>
+    <div style="padding-top: 50px; padding-left: 50px; text-align: left;">
+        <h1>Add to Collection - {{collectionname}}</h1>
+        <form action="{{url_for('create_item')}}?target={{url_for('show_collection', collectionid=collectionid)}}" method="post" enctype="multipart/form-data">
+            <p>Blind Box Series: <input type="text" name="itemseries" value=""/></p>
+            <p>Name: <input type="text" name="itemname" value=""/></p>
+            <p>Choose file: <input type="file" name="file" accept="image/*" required/></p>
+            <p>Description: <input type="text" name="description" value=""/></p>
+            <p>Condition: <input type="text" name="condition" value=""/></p>
+            <p><input type="hidden" name="collectionid" value="{{collectionid}}"/></p>
+            <p><input type="submit" name="create" value="create"/></p>
+            <p><input type="hidden" name="operation" value="create"/></p>
+        </form>
+    </div>
+</html>

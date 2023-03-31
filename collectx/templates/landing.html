@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Collectx</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link href='https://fonts.googleapis.com/css?family=Inter' rel='stylesheet'>
+</head>
+    <div class="navbar" style="font-size: 20px">
+        <ul style="float:left">
+            <li><a href="/">Collectx</a></li>
+        </ul>
+    </div>
+    <h2 style="padding-top: 100px">Welcome to Collectx! Log in or create an account to get started. </h2>
+    <div style="padding-bottom: 20px"><a href="{{url_for('login')}}"><p class="button">Log in</p></a></div>
+    <div><a href="{{url_for('create')}}"><p class="button">Sign up</p></a></div>
+</html>

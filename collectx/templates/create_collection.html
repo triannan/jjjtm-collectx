@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Collectx</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link href='https://fonts.googleapis.com/css?family=Inter' rel='stylesheet'>
+</head>
+    <div class="navbar" style="font-size: 20px;">
+        <ul style="float:left">
+            <li><a href="/">Collectx</a></li>
+        </ul>
+        <form id="form" action="{{url_for('search')}}" method="post" enctype="multipart/form-data"> 
+            <input type="text" id="query" name="q" placeholder="Search for other users' collections..." value="" required>
+            <input type="submit" name="search" value="Search"/>
+        </form>
+        <ul style="float:right">
+            <li><a><img class="icons" src="{{url_for('static', filename='/images/message_icon.png')}}"></a></li>
+            <li><a><img class="icons" src="{{url_for('static', filename='/images/directory_icon.png')}}"></a></li>
+            <li><a href="{{url_for('show_profile', username=logname)}}"><img class="icons" src="{{url_for('static', filename='/images/profile_icon.png')}}"></a></li>
+        </ul>
+    </div>
+    <div style="padding-top: 50px; padding-left: 50px; text-align: left;">
+        <h1>Create New Collection</h1>
+        <script type="text/javascript">
+            function changeValue(){
+                var option=document.getElementById('category').value;
+                if(option=="Sonny Angels"){
+                        document.getElementById('category').value="Sonny Angels";
+                }
+            }
+        </script>
+        <label for="category">Category:</label>
+        <form action="{{url_for('create_collection')}}?target={{url_for('show_index')}}" method="post" enctype="multipart/form-data">
+            <p><input type="text" name="collectionname" id="field" value="" required/></p>
+            <p><input type="file" name="file" accept="image/*" required/></p>
+            <p><input type="submit" name="create" value="Create" /></p>
+            <p><input type="hidden" name="operation" value="create"/></p>
+        </form>
+    </div>
+</html>

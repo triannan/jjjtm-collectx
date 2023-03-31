@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>insta485</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link href='https://fonts.googleapis.com/css?family=Inter' rel='stylesheet'>
+</head>
+    <div class="navbar" style="font-size: 20px">
+        <ul style="float:left">
+            <li><a href="/">Collectx</a></li>
+        </ul>
+    </div>
+    <div class="posts" style="padding-top: 80px;">
+        <h2>Create your account</h2>
+        <form action="{{url_for('account')}}?target={{url_for('show_index')}}" method="post" enctype="multipart/form-data">
+            <p><input type="text" name="username" placeholder="username" required/></p>
+            <p><input type="password" name="password" placeholder= "password" required/></p>
+            <p><input type="submit" name="signup" value="sign up"/></p>
+            <p><input type="hidden" name="operation" value="create"/></p>
+        </form>
+        <p>Have an account? <a href="{{url_for('login')}}"><b>Log in</b></a></p>
+    </div>
+</html>

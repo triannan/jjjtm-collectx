@@ -1,0 +1,15 @@
+#!/bin/bash
+#
+# collectxrun
+#
+set -Eeuo pipefail
+set -x
+# checking if db exists and creating db
+if [ ! -f var/collectx.sqlite3 ]; then
+    ./bin/collectxdb create
+fi
+# flask env and app
+export FLASK_ENV=development
+export FLASK_APP=collectx
+# run
+flask run --host 0.0.0.0 --port 8000

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Collectx</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link href='https://fonts.googleapis.com/css?family=Inter' rel='stylesheet'>
+</head>
+    <div class="navbar" style="font-size: 20px;">
+        <ul style="float:left">
+            <li><a href="/">Collectx</a></li>
+        </ul>
+        <form id="form" action="{{url_for('search')}}" method="post" enctype="multipart/form-data"> 
+            <input type="text" id="query" name="q" placeholder="Search for other users' collections..." value="" required>
+            <input type="submit" name="search" value="Search"/>
+        </form>
+        <ul style="float:right">
+            <li><a><img class="icons" src="{{url_for('static', filename='/images/message_icon.png')}}"></a></li>
+            <li><a><img class="icons" src="{{url_for('static', filename='/images/directory_icon.png')}}"></a></li>
+            <li><a href="{{url_for('show_profile', username=logname)}}"><img class="icons" src="{{url_for('static', filename='/images/profile_icon.png')}}"></a></li>
+        </ul>
+    </div>
+    <div style="padding-top: 50px; padding-left: 50px; text-align: left;">
+        <h1>Welcome back to Collectx!</h1>
+        <h2>Your collections</h2>
+        <div class="collectiondiv"><a href="{{url_for('create_collections_page')}}"><img class="collection" src="../static/images/new_collection.png"></a></div>
+        {% for collection in collections %}
+            <div class="collectiondiv"><a href="{{url_for('show_collection', collectionid=collection.collectionid)}}"><img src="{{url_for('files', filename=collection.filename)}}" alt = "img" class="collection"></a>{{collection.collectionname}}</div>
+        {% endfor %}
+    </div>
+</html>
