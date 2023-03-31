@@ -3,6 +3,7 @@
 ok hey guys
 
 run `./bin/collectxdb reset` to autopopulate a small test account username: jjjtm and password: password 
+<br>i think u guys should log into the test account but also make ur own account to look at things from 2 different accounts to see if theres any issues or bugs
 <br>run `./bin/collectxrun` to run the website locally 
 
 the database is in `var/collectx.sqlite3`
