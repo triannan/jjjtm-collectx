@@ -17,7 +17,7 @@ def show_collection(collectionid):
     """Display collection."""
     if 'username' not in flask.session:
         return flask.redirect(flask.url_for('login'))
-    logname1 = flask.session['username']
+    logname = flask.session['username']
     connection = collectx.model.get_db()
     cur = connection.execute(
         "SELECT collections.collectionname, collections.collectionid, collections.owner "
@@ -40,7 +40,7 @@ def show_collection(collectionid):
         (collection['owner'], )
     )
     ownerfile = cur.fetchone()
-    context = {"ownerfile": ownerfile['filename'], "owner": collection['owner'], "logname": logname1, "collectionname": collection['collectionname'], "collectionid": collection['collectionid'], "items": items}
+    context = {"ownerfile": ownerfile['filename'], "owner": collection['owner'], "logname": logname, "collectionname": collection['collectionname'], "collectionid": collection['collectionid'], "items": items}
     return flask.render_template("show_collection.html", **context)
 
 @collectx.app.route('/collections/create/')
@@ -48,7 +48,8 @@ def create_collections_page():
     """Create collection."""
     if 'username' not in flask.session:
         return flask.redirect(flask.url_for('login'))
-    context = {}
+    logname = flask.session['username']
+    context = {"logname": logname}
     return flask.render_template("create_collection.html", **context)
 
 

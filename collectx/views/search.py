@@ -15,7 +15,7 @@ def search():
     """Search."""
     if 'username' not in flask.session:
         return flask.redirect(flask.url_for('login'))
-    
+    logname = flask.session['username']
     req = flask.request.form
     query = req.get("q").split()
     print(query)
@@ -32,5 +32,5 @@ def search():
                 if q.lower() in item['itemname'].lower():
                     filt.append(item)
                     break
-    context = {"items": filt}
+    context = {"items": filt, "logname": logname}
     return flask.render_template("search.html", **context)
